@@ -29,19 +29,6 @@ player = Player(world.starting_room)
 # traversal_path = ['n', 'n']
 traversal_path = []
 
-def create_moves():
-    event = player.current_room.get_exits()
-    return dictionary(run(event, ['?'] * len(event)))
-
-cp = {}
-
-def choose_room():
-    green_light = cp.get(player.current_room.id, create_moves())
-    unknown = [i for i a in green_light.items() if a == '?']
-    if len(unknown) > 0:
-        return unknown.pop()
-    return None
-
 
 
 # TRAVERSAL TEST - DO NOT MODIFY
