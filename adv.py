@@ -50,6 +50,26 @@ def choose_path(room_id):
         if room_num == room_id:
             return reverse_exits[new_exit]
 
+while len(rooms) < len(world.rooms):
+    move = choose_path(player.current_room.id)
+    player.travel(move)
+    traversal_path.append(move)
+
+    if player.current_room.id is not visited[-1]:
+        visited.append(player.current_room.id)
+        path.append(player.current_room.id)
+    
+    if player.current_room.id not in rooms.keys():
+        rooms[player.current_room.id] = dict()
+        
+        for new_exit in player.current_room.get_exits():
+            rooms[player.current_room.id][new_exit] = '?'
+    
+    if rooms[player.current_room.id][reverse_exits[move]] == '?':
+        rooms[visited[-2]][move] = player.current_room.id
+        rooms[player.current_room.id][reverse_exits[move]] = visited[-
+
+
 # TRAVERSAL TEST - DO NOT MODIFY
 visited_rooms = set()
 player.current_room = world.starting_room
