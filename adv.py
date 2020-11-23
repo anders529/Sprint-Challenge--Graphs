@@ -34,7 +34,21 @@ path = list()
 reverse_exits = {'n': 's', 's': 'n', 'w': 'e', 'e': 'w'}
 visited = list()
 
+visited.append(curr.id)
+path.append(curr.id)
+rooms[curr.id] = dict()
+for room_exits in curr.get_exits():
+    rooms[curr.id][room_exits] = '?'
 
+def choose_path(room_id):
+    for exit in rooms[room_id]:
+        if rooms[room_id][exit] == '?':
+            return exit
+
+    del visited[-1]
+    for new_exit, room_num in rooms[visited[-1]].items():
+        if room_num == room_id:
+            return reverse_exits[new_exit]
 
 # TRAVERSAL TEST - DO NOT MODIFY
 visited_rooms = set()
